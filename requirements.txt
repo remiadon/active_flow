@@ -1,0 +1,3 @@
+fire
+scikit-mine==0.0.4
+rich
