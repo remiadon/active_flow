@@ -1,3 +1,4 @@
 fire
-scikit-mine==0.0.4
+joblib
 rich
+pandas
