@@ -61,9 +61,7 @@ class Base(object):
         self.auto_save = auto_save
 
     @check_requirements("fit")
-    def create_model(self, output_path: str, klass: str, **kwargs):
-        if not output_path.endswith(".pkl"):
-            raise ValueError("Please use the `.pkl` file format to save you model")
+    def create_model(self, klass: str, **kwargs):
         klass = dyn_import(klass)
         self.model = klass(**kwargs)
         return self  # TODO: return the model itself ? or inherit every function from it, like in dask-ml MetaEstimators
