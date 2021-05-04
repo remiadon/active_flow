@@ -1,4 +1,4 @@
-# a CLI for active learning and interactive data mining
+# a CLI for active learning & interactive data mining
 <img src="https://user-images.githubusercontent.com/2931080/117039599-3e82c300-ad09-11eb-9749-189730d3b196.png" alt="drawing" width="400"/>
 
 
