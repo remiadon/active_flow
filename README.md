@@ -22,3 +22,5 @@ active_flow uses [python fire](https://github.com/google/python-fire) internally
 ```bash
 python -m aflow.active --help
 ```
+
+## [Functional definitions](functional_definitions.md)
