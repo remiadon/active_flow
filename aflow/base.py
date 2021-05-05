@@ -44,7 +44,6 @@ def _check_is_fitted(estimator, X):
     try:
         fn(sample)
     except:
-        print(f"{estimator} not fitted")
         return False
     return True
 
@@ -75,15 +74,33 @@ class Base(object):
         self.model = joblib.load(path)
         return self
 
-    def fit(self, X, y):
-        if _check_is_fitted(self.model, X):
+    def fit(self, X, y, refit=False):
+        """
+        Parameters
+        ----------
+        X: array-like
+            input data
+        y: array-like
+            freshly obtained targets
+        refit: bool, default=False
+            Either to entirely refit the model, or incrementally fit it
+            By default, it will check if incremental fitting is possible.
+            If not, the entire model is re-trained.
+        """
+        if _check_is_fitted(self.model, X) and hasattr(self.model, 'partial_fit'):
             return self.model.partial_fit(X, y)
         return self.model.fit(X, y)  # fallback
 
 
     def read_csv(self, path, *args, **kwargs):    # TODO fire pandas function directly ??
         __doc__ = pd.read_csv.__doc__
-        self.data = pd.read_csv(path, *args, **kwargs)
+        df = pd.read_csv(path, *args, **kwargs)
+        nans = df.isna().sum()
+        if nans.any():
+            raise ValueError(
+                f"input csv file @ {path} contains nans for the following columns {nans}"
+            )
+        self.data = df
         return self
 
     def fetch_data(self, fn, *args, **kwargs):    # TODO fire pandas function directly ??

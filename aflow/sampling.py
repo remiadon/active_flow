@@ -13,7 +13,7 @@ def uncertainty(classifier, X) -> np.ndarray:
     """
     # calculate uncertainty for each point provided
     if _check_is_fitted(classifier, X):
-        classwise_uncertainty = classifier.predict_proba(X, **predict_proba_kwargs)
+        classwise_uncertainty = classifier.predict_proba(X)
     else:
         return np.ones(shape=(X.shape[0], ))
 

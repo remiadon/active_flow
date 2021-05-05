@@ -11,6 +11,28 @@ import sys
 
 import signal
 
+def ask_increase_batch_size(console, batch_size, min_size=20):
+    if batch_size < min_size:
+        new_bs = console.input(
+            f"""
+            The current model is not incremental, having a batch_size of {batch_size}
+            presents a risk to record the same target {batch_size} times in a row,
+            thus making learning from a single target impossible.\n
+            Please enter a batch_size higher than {min_size} :
+            """
+        )
+        try:
+            new_bs = int(new_bs)
+        except TypeError:
+            print(f"you did not enter a integer, asking again")
+            return ask_increase_batch_size(console, batch_size, min_size)
+
+        if new_bs < min_size:
+            return ask_increase_batch_size(console, new_bs, min_size)
+
+    return new_bs
+
+
 class Active(Base):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -22,6 +44,9 @@ class Active(Base):
     def loop(self, name, batch_size=10, n_iter:int = 2, *args):
         if name not in ("uncertainty", ):  # TODO : allow functions from modAL ?
             raise ValueError("only uncertainty sampling is supported for now")
+
+        if not hasattr(self.model, "partial_fit") and batch_size < 20:
+            batch_size = ask_increase_batch_size(self.console, batch_size)
 
         for i in range(n_iter):
             cands = uncertainty(self.model, self.data)
