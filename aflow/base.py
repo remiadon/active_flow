@@ -8,15 +8,10 @@ import datetime as dt
 import joblib
 import pandas as pd
 
+from . import dyn_import
+
 from rich import print
 import sys
-
-def dyn_import(name):
-    components = name.split('.')
-    mod = __import__(".".join(components[:-1]))
-    for comp in components[1:]:
-        mod = getattr(mod, comp)
-    return mod
 
 def check_requirements(*reqs):
     def inner(fn: Callable):

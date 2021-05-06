@@ -1,5 +1,6 @@
 from .base import Base
 from .sampling import uncertainty
+from . import dyn_import
 import pandas as pd
 
 from rich import print
@@ -11,7 +12,7 @@ import sys
 
 import signal
 
-def ask_increase_batch_size(console, batch_size, min_size=20):
+def ask_increase_batch_size(console, batch_size, min_size=10):
     if batch_size < min_size:
         new_bs = console.input(
             f"""
