@@ -1,4 +1,6 @@
-# Active Flow, a CLI for active learning and interactive data mining
+# a CLI for (inter)active learning & data mining
+<img src="https://user-images.githubusercontent.com/2931080/117039599-3e82c300-ad09-11eb-9749-189730d3b196.png" alt="drawing" width="400"/>
+
 
 ## key features
 - simple syntax, build entire pipelines in a single line of code
@@ -12,10 +14,13 @@
 
 
 ## Example with a simple logitic regression on the titanic dataset
-![2021-05-04 17 45 08](https://user-images.githubusercontent.com/2931080/117031794-37f04d80-ad01-11eb-9f43-e84e6362449d.gif)
+![2021-05-04 18 21 54](https://user-images.githubusercontent.com/2931080/117036759-13e33b00-ad06-11eb-8bb8-709524637f52.gif)
+
 
 ## Documentation
 active_flow uses [python fire](https://github.com/google/python-fire) internally, so you can call eg.
 ```bash
 python -m aflow.active --help
 ```
+
+## [Functional definitions](functional_definitions.md)
