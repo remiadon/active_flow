@@ -11,6 +11,8 @@ This instance - the model - has to pass certain checks. If not, `active_flow` wi
 be triggered for the model to be accepted by the CLI.
 
 ### Active Machine Learning
+<img src="https://user-images.githubusercontent.com/2931080/117264586-a8a77f00-ae53-11eb-9e0c-af2d593e70b1.png" alt="" style="width:30%">
+
 Estimator to be sumbitted to the `aflow.active` CLI must implement a **fit** method, as defined in the scikit-learn API,
 or a **partial_fit** method, to increment the model once targets have been queried from the user for a given batch.
 
